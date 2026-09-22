@@ -1,5 +1,3 @@
-using static System.Buffers.Binary.BinaryPrimitives;
-
 namespace Hash.Hashing;
 
 public class HashFunc
@@ -8,17 +6,17 @@ public class HashFunc
     {
         ArgumentNullException.ThrowIfNull(data);
 
-        ulong a = 1;
-        ulong b = 1;
-        ulong c = 1;
-        ulong d = 1;
+        ulong a = 15036463542186079559UL;
+        ulong b = 12483322617323990657UL;
+        ulong c = 2658435062210208447UL;
+        ulong d = 1587461109643488129UL;
 
         foreach (byte value in data)
         {
-            a = unchecked(a * value);
-            b = unchecked(b * a) ^ a;
-            c = unchecked(c ^ a + b);
-            d = unchecked(d * b) ^ c;
+            a = unchecked(a ^ value + b) ^ d;
+            b = unchecked((b + c) ^ a) ^ d;
+            c = unchecked(c ^ b + d) ^ a;
+            d = unchecked((d ^ c) + a) ^ b;
         }
 
         return $"{a:X16}{b:X16}{c:X16}{d:X16}";
