@@ -4,8 +4,39 @@ using Hash.Hashing;
 var inputReader = new InputReader();
 var hashFunc = new HashFunc();
 
-string filePath = Path.Combine(AppContext.BaseDirectory, "data", "test.txt");
+string sampleFilePath = Path.Combine(AppContext.BaseDirectory, "data", "test.txt");
 
-byte[] data = inputReader.ReadFile(filePath);
+byte[] data;
+
+while (true)
+{
+    Console.WriteLine("1 - Write text");
+    Console.WriteLine("2 - Enter file path");
+    Console.WriteLine("3 - Use sample file");
+    Console.WriteLine("4 - Exit");
+
+    string? choice = Console.ReadLine();
+    switch (choice)
+    {
+        case "1":
+            data = inputReader.ReadText();
+            break;
+        case "2":
+            data = inputReader.ReadFileFromConsole();
+            break;
+        case "3":
+            data = inputReader.ReadFile(sampleFilePath);
+            break;
+        case "4":
+            return;
+        default:
+            Console.WriteLine("Invalid choice. Try again.");
+            continue;
+    }
+
+    break;
+}
+
 string hash = hashFunc.ComputeHash(data);
-Console.WriteLine(hash);
+Console.WriteLine();
+Console.WriteLine($"Hash: {hash}");

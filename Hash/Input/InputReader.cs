@@ -7,9 +7,11 @@ public class InputReader
     public byte[] ReadText()
     {
         Console.WriteLine("Enter text: ");
+
         string? text = Console.ReadLine();
-        if (string.IsNullOrEmpty(text))
-            throw new Exception("No text was provided");
+        if (text is null)
+            throw new InvalidOperationException("Console input was closed.");
+
         return Encoding.UTF8.GetBytes(text);
     }
 
@@ -30,6 +32,7 @@ public class InputReader
             {
                 throw new InvalidOperationException("Console input was closed.");
             }
+
             try
             {
                 return ReadFile(path);
