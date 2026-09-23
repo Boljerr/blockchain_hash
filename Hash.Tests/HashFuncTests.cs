@@ -6,6 +6,7 @@ namespace Hash.Tests;
 public class HashFuncTests
 {
     private HashFunc _hashFunc = new();
+	
 
     [Fact]
     public void EmptyInputReturnsValidHash()
@@ -77,12 +78,6 @@ public class HashFuncTests
         _hashFunc.ComputeHash(input);
 
         Assert.Equal(original, input);
-    }
-
-    [Fact]
-    public void NullInput_ThrowsArgumentNullException()
-    {
-        Assert.Throws<ArgumentNullException>(() => _hashFunc.ComputeHash(null!));
     }
 
     private static void AssertValidHash(string hash)

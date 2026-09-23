@@ -1,3 +1,4 @@
+namespace Hash.Hashing;
 using System.Buffers.Binary;
 using System.Numerics;
 
