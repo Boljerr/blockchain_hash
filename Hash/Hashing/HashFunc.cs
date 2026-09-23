@@ -26,6 +26,8 @@ public class HashFunc
             c = unchecked((c ^ b) * MultiplierC + d) ^ a;
             d = unchecked(((d ^ c) + a) * MultiplierD) ^ b;
         }
+        ulong length = (ulong)data.Length;
+        a = unchecked(a ^ b * length) ^ c;
         d = unchecked(((b + c) ^ a) * MultiplierC) ^ c;
         c = unchecked((c ^ d) * MultiplierD) ^ a;
         b = unchecked(((d + b) ^ a) * MultiplierA) ^ c;
