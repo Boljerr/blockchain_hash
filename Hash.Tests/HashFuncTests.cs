@@ -1,18 +1,20 @@
-﻿using System.Text;
+﻿using System.Runtime.InteropServices;
+using System.Text;
 using Hash.Hashing;
 
 namespace Hash.Tests;
 
 public class HashFuncTests
 {
-    private HashFunc _hashFunc = new();
-	
+    private readonly HashFunc _hashFunc = new();
 
     [Fact]
     public void EmptyInputReturnsValidHash()
     {
-        string hash = _hashFunc.ComputeHash(Array.Empty<byte>());
-        AssertValidHash(hash);
+        string hashI = _hashFunc.ComputeHash(Array.Empty<byte>());
+        string hashA = HashaMasha.ComputeHash(Array.Empty<byte>());
+        AssertValidHash(hashI);
+        AssertValidHash(hashA);
     }
 
     [Theory]
@@ -22,8 +24,10 @@ public class HashFuncTests
     [InlineData(255)]
     public void SingleByteInputReturnsValidHash(int value)
     {
-        string hash = _hashFunc.ComputeHash(new[] { (byte)value });
-        AssertValidHash(hash);
+        string hashI = _hashFunc.ComputeHash(new[] { (byte)value });
+        string hashA = HashaMasha.ComputeHash(new[] { (byte)value });
+        AssertValidHash(hashI);
+        AssertValidHash(hashA);
     }
 
     [Fact]
@@ -31,10 +35,13 @@ public class HashFuncTests
     {
         byte[] input = Encoding.UTF8.GetBytes("Hello World");
 
-        string first = _hashFunc.ComputeHash(input);
-        string second = _hashFunc.ComputeHash(input);
+        string firstI = _hashFunc.ComputeHash(input);
+        string secondI = _hashFunc.ComputeHash(input);
+        string firstA = HashaMasha.ComputeHash(input);
+        string secondA = HashaMasha.ComputeHash(input);
 
-        Assert.Equal(first, second);
+        Assert.Equal(firstI, secondI);
+        Assert.Equal(firstA, secondA);
     }
 
     [Fact]
@@ -43,30 +50,42 @@ public class HashFuncTests
         byte[] a = Encoding.UTF8.GetBytes("A");
         byte[] b = Encoding.UTF8.GetBytes("B");
 
-        string firstA = _hashFunc.ComputeHash(a);
+        string firstAI = _hashFunc.ComputeHash(a);
         _hashFunc.ComputeHash(b);
-        string secondA = _hashFunc.ComputeHash(a);
+        string secondAI = _hashFunc.ComputeHash(a);
 
-        Assert.Equal(firstA, secondA);
+        string firstAA = HashaMasha.ComputeHash(a);
+        HashaMasha.ComputeHash(b);
+        string secondAA = HashaMasha.ComputeHash(a);
+
+        Assert.Equal(firstAI, secondAI);
+        Assert.Equal(firstAA, secondAA);
     }
 
     [Fact]
     public void Utf8Input_ReturnsValidHash()
     {
         byte[] input = Encoding.UTF8.GetBytes("Žąsis 🙂");
-
-        string hash = _hashFunc.ComputeHash(input);
-
-        AssertValidHash(hash);
+        
+        string hashI = _hashFunc.ComputeHash(input);
+        string hashA = HashaMasha.ComputeHash(input);
+        AssertValidHash(hashI);
+        AssertValidHash(hashA);
     }
-
-    [Fact]
-    public void SelectedDifferentInputs_ReturnDifferentHashes()
+    
+    [Theory]
+    [InlineData("abc", "abc\n")]
+    [InlineData("abc", " abc")]
+    [InlineData("abc", "abc ")]
+    [InlineData("aaaa", "aaab")]
+    [InlineData("AB", "BA")]
+    public void SelectedDifferentInputsReturnDifferentHashes(string first, string second)
     {
-        string first = _hashFunc.ComputeHash(Encoding.UTF8.GetBytes("AB"));
-        string second = _hashFunc.ComputeHash(Encoding.UTF8.GetBytes("BA"));
-
-        Assert.NotEqual(first, second);
+        byte[] firstBytes = Encoding.UTF8.GetBytes(first);
+        byte[] secondBytes = Encoding.UTF8.GetBytes(second);
+        
+        Assert.NotEqual(_hashFunc.ComputeHash(firstBytes), _hashFunc.ComputeHash(secondBytes));
+        Assert.NotEqual(HashaMasha.ComputeHash(firstBytes), HashaMasha.ComputeHash(secondBytes));
     }
 
     [Fact]
@@ -76,7 +95,8 @@ public class HashFuncTests
         byte[] original = input.ToArray();
 
         _hashFunc.ComputeHash(input);
-
+        Assert.Equal(input, original);
+        HashaMasha.ComputeHash(input);
         Assert.Equal(original, input);
     }
 
