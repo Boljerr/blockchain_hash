@@ -26,6 +26,10 @@ public class HashFunc
             c = unchecked((c ^ b) * MultiplierC + d) ^ a;
             d = unchecked(((d ^ c) + a) * MultiplierD) ^ b;
         }
+        d = unchecked(((b + c) ^ a) * MultiplierC) ^ c;
+        c = unchecked((c ^ d) * MultiplierD) ^ a;
+        b = unchecked(((d + b) ^ a) * MultiplierA) ^ c;
+        a = unchecked(((a + d) ^ b) * MultiplierB) ^ d;
 
         return $"{a:X16}{b:X16}{c:X16}{d:X16}";
     }
