@@ -17,7 +17,6 @@ while (true) {
     switch (choice) {
         case "1": 
             data = HashIO.getHashTextFromUser();
-            Console.WriteLine(HashaMasha.Hash256(data));
             break;
         case "2": 
             data = HashIO.getHashFileFromUser(); 

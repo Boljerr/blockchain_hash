@@ -11,7 +11,7 @@ public class HashaMasha {
     private const ulong InitialStateC = 0xA4093822299F31D0UL;
     private const ulong InitialStateD = 0x082EFA98EC4E6C89UL;
 
-    public static string Hash256(ReadOnlySpan<byte> message) {
+    public static string ComputeHash(ReadOnlySpan<byte> message) {
         ulong stateA = InitialStateA;
         ulong stateB = InitialStateB;
         ulong stateC = InitialStateC;
