@@ -13,5 +13,7 @@ foreach (var function in functions)
 {
     Console.WriteLine($"Testing {function.Name}");
     
-    Experiment2.Run(function.Hash);
+    //Experiment2.Run(function.Hash);
+    
+    Experiment4.Run(function.Name ,function.Hash);
 }
