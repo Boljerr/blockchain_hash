@@ -11,4 +11,10 @@
       <ProjectReference Include="..\Hash\Hash.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+        <Content Include="data\\**\\*">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
 </Project>

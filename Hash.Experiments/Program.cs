@@ -1,5 +1,4 @@
 ﻿using Hash.Hashing;
-using Hash.Experiments;
 using Hash.Experiments.Experiments;
 
 var igno = new HashFunc();
