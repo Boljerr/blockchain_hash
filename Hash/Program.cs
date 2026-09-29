@@ -3,6 +3,7 @@ using Hash.Hashing;
 
 var inputReader = new InputReader();
 var hashFunc = new HashFunc();
+var hashaMasha = new HashaMasha();
 
 string sampleFilePath = Path.Combine(AppContext.BaseDirectory, "data", "test.txt");
 
@@ -53,7 +54,7 @@ while (true)
             Console.WriteLine($"Hash: {hashIgno}");
             break;
         case "2":
-            string hashAivaro = HashaMasha.ComputeHash(data);
+            string hashAivaro = hashaMasha.ComputeHash(data);
             Console.WriteLine();
             Console.WriteLine($"Hash: {hashAivaro}");
             break;
