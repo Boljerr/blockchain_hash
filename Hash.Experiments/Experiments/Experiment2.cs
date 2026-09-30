@@ -37,6 +37,7 @@ public static class Experiment2
         var reader = new InputReader();
         string sampleFilePath = Path.Combine(AppContext.BaseDirectory, "data", "Experiment2.txt");
         
+        Console.WriteLine("Type: ABC");
         byte[] typedBytes = reader.ReadText();
         byte[] fileBytes = reader.ReadFile(sampleFilePath);
 

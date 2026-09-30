@@ -26,8 +26,11 @@ foreach (var function in functions)
     var random = new Random(seed);
     Console.WriteLine($"Testing {function.Name}");
     
-    //Experiment2.Run(function.Hash, function.HexLength);
-    
+    Experiment2.Run(function.Hash, function.HexLength);
+    Experiment3.Run(function.Name, function.Hash);
     Experiment4.Run(function.Name ,function.Hash, function.HexLength);
+    Experiment5.Run(function.Name, function.Hash, seed, function.HexLength);
     Experiment6.Run(function.Name, function.Hash, random);
+    Experiment7.Run(function.Name, function.Hash, seed, function.HexLength);
+
 }

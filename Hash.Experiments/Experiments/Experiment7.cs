@@ -15,7 +15,7 @@ public static class Experiment7
 
     private record AttackResult(long Attempts, long FirstMatch, List<Match> Matches, double ElapsedMs);
 
-    public static void Run(string name, Func<byte[], string> hash, int seed)
+    public static void Run(string name, Func<byte[], string> hash, int seed, int hexLenght)
     {
         Console.WriteLine($"=== Experiment 7 ({name}): guessing, public salt and secret randomness ===");
 
@@ -29,7 +29,7 @@ public static class Experiment7
         Console.WriteLine($"Candidates: {candidates.Count} strings \"0000\"..\"9999\", 4 ASCII bytes each");
         Console.WriteLine($"Seed: {seed}; chosen target (never passed to the attack): {Text(target)}");
 
-        Helpers.AssertValidHash(hash(target));
+        Helpers.AssertValidHash(hash(target), hexLenght);
         foreach (var candidate in candidates) // warm-up, so JIT compilation is not timed
             hash(candidate);
 

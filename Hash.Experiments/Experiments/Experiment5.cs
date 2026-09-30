@@ -7,7 +7,7 @@ public static class Experiment5
     private static readonly int[] Lengths = { 10, 100, 500, 1000 };
     private const int PairsPerLength = 100_000;
 
-    public static void Run(string name, Func<byte[], string> hash, int seed)
+    public static void Run(string name, Func<byte[], string> hash, int seed, int hexLenght)
     {
         Console.WriteLine($"=== Experiment 5 ({name}): collisions ===");
         Console.WriteLine($"Alphabet ({Helpers.Alphabet.Length} symbols, 1 ASCII byte each): {Helpers.Alphabet}");
@@ -22,7 +22,7 @@ public static class Experiment5
 
         foreach (int length in Lengths)
         {
-            Helpers.AssertValidHash(hash(Helpers.Generate(length, new Random(seed))));
+            Helpers.AssertValidHash(hash(Helpers.Generate(length, new Random(seed))), hexLenght);
 
             // hash -> distinct inputs that produced it. Identical inputs always share a hash,
             // so inputs only need to be compared within one bucket.
