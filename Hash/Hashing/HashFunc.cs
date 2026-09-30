@@ -9,6 +9,7 @@ public class HashFunc
     private const ulong MultiplierC = 12760894674763063281UL;
     private const ulong MultiplierD = 3200907817819897205UL;
     private const ulong MultiplierIndex = 11132683126343784489UL;
+
     public string ComputeHash(byte[] data)
     {
         ArgumentNullException.ThrowIfNull(data);
@@ -24,19 +25,23 @@ public class HashFunc
             ulong input = unchecked((value + (ulong)i) * MultiplierIndex);
             
             a = unchecked(a ^ (input + b) * MultiplierA) ^ d;
-            BitOperations.RotateLeft(b, 31);
+            b = BitOperations.RotateLeft(b, 21);
+
             b = unchecked(((b + c) ^ a) * MultiplierB) ^ d;
-            BitOperations.RotateLeft(d, 31);
+            d = BitOperations.RotateLeft(d, 27);
+
             c = unchecked((c ^ b) * MultiplierC + d) ^ a;
-            BitOperations.RotateLeft(c, 31);
+            c = BitOperations.RotateLeft(c, 61);
+
             d = unchecked(((d ^ c) + a) * MultiplierD) ^ b;
-            BitOperations.RotateLeft(a, 73);
+            a = BitOperations.RotateLeft(a, 73);
         }
-        a = unchecked(a ^ b * MultiplierB ) * c;
+
+        a = unchecked((a ^ (b * MultiplierB)) * MultiplierA) ^ c;
         d = unchecked(((b + c) ^ a) * MultiplierC) ^ c;
         c = unchecked((c ^ d) * MultiplierD) ^ a;
         b = unchecked(((d + b) ^ a) * MultiplierA) ^ c;
-        BitOperations.RotateLeft(d, 67);
+        d = BitOperations.RotateLeft(d, 67);
 
         return $"{a:X16}{b:X16}{c:X16}{d:X16}";
     }
