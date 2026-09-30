@@ -463,4 +463,5 @@ Thumbs.db
 Desktop.ini
 .DS_Store
 
-**/Results
+**/Results/Experiment6*
+.vscode

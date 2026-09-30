@@ -1,0 +1,9 @@
+function,scenario,targets,attempts,elapsed_ms,cracked,found
+MD5,no_salt,1,10000,2.3885,1,9388
+MD5,public_salt,1,10000,2.3291,1,9388
+MD5,reuse_no_salt_table,5,10000,2.6118,5,0799 0213 8012 2124 6288
+MD5,reuse_first_salt_table,5,10000,2.8175,1,0799 - - - -
+MD5,reuse_search_per_salt,5,50000,16.7181,5,0799 0213 8012 2124 6288
+MD5,secret_r_1_byte,1,2560000,596.344,1,9388||5C
+MD5,secret_r_16_bytes_estimate,1,3.4028236692093846E+42,7.92677E+38,0,not_run
+MD5,secret_r_revealed,1,10000,2.3837,1,9388

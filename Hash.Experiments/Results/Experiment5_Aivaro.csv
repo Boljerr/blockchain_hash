@@ -1,0 +1,6 @@
+function,input_set,seed,pairs,pair_collisions,inputs,distinct_inputs,collision_groups
+Aivaro,length 10,676767,100000,0,200000,200000,0
+Aivaro,length 100,676767,100000,0,200000,200000,0
+Aivaro,length 500,676767,100000,0,200000,200000,0
+Aivaro,length 1000,676767,100000,0,200000,200000,0
+Aivaro,structured,-,0,0,833,831,0
