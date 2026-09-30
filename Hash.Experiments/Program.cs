@@ -4,6 +4,7 @@ using Hash.Experiments.Experiments;
 
 var igno = new HashFunc();
 var aivaro = new HashaMasha();
+var ignoAi = new HashAI();
 
 var functions = new (string Name, int HexLength, Func<byte[], string> Hash)[]
 {
@@ -12,6 +13,7 @@ var functions = new (string Name, int HexLength, Func<byte[], string> Hash)[]
     ("MD5", 32, bytes => Convert.ToHexString(MD5.HashData(bytes))),
     ("SHA1", 40, bytes => Convert.ToHexString(SHA1.HashData(bytes))),
     ("SHA256", 64, bytes => Convert.ToHexString(SHA256.HashData(bytes))),
+    ("IgnoAI", 64, ignoAi.ComputeHash),
 };
 
 if (args is [Experiment3.ChildArgument, var childName])
