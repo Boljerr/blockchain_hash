@@ -1,3 +1,5 @@
+using System.Numerics;
+
 namespace Hash.Hashing;
 
 public class HashFunc
@@ -22,16 +24,19 @@ public class HashFunc
             ulong input = unchecked((value + (ulong)i) * MultiplierIndex);
             
             a = unchecked(a ^ (input + b) * MultiplierA) ^ d;
+            BitOperations.RotateLeft(b, 31);
             b = unchecked(((b + c) ^ a) * MultiplierB) ^ d;
+            BitOperations.RotateLeft(d, 31);
             c = unchecked((c ^ b) * MultiplierC + d) ^ a;
+            BitOperations.RotateLeft(c, 31);
             d = unchecked(((d ^ c) + a) * MultiplierD) ^ b;
+            BitOperations.RotateLeft(a, 73);
         }
-        ulong length = (ulong)data.Length;
-        a = unchecked(a ^ b * length) ^ c;
+        a = unchecked(a ^ b * MultiplierB ) * c;
         d = unchecked(((b + c) ^ a) * MultiplierC) ^ c;
         c = unchecked((c ^ d) * MultiplierD) ^ a;
         b = unchecked(((d + b) ^ a) * MultiplierA) ^ c;
-        a = unchecked(((a + d) ^ b) * MultiplierB) ^ d;
+        BitOperations.RotateLeft(d, 67);
 
         return $"{a:X16}{b:X16}{c:X16}{d:X16}";
     }

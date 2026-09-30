@@ -11,7 +11,7 @@ public static class Experiment6
 
         var rows = new List<string>
         {
-            "length,pair,changed_index,bits_different,hex_digits_different,bit_percent,hex_percent"
+            "function,length,pair,changed_index,bits_different,hex_digits_different,bit_percent,hex_percent"
         };
 
         foreach (var length in lengths)
@@ -55,7 +55,7 @@ public static class Experiment6
                 
                 double bitPercent = 100.0 * differentBits / firstBits.Length;
                 double hexPercent = 100.0 * differentHexDigits / firstHex.Length;
-                rows.Add($"{length},{pair},{changedIndex},{differentBits},{differentHexDigits},{bitPercent.ToString("F6")},{hexPercent.ToString("F6")}");
+                rows.Add($"{name},{length},{pair},{changedIndex},{differentBits},{differentHexDigits},{bitPercent.ToString("F6")},{hexPercent.ToString("F6")}");
             }
             
         }
