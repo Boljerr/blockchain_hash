@@ -7,23 +7,14 @@ public static class Experiment2
 {
     public static void Run(Func<byte[], string> hash)
     {
-        byte[][] inputs =
+        //Hashes every txt file in data
+        string dataDirectory = Path.Combine(AppContext.BaseDirectory, "data");
+        foreach (string path in Directory.GetFiles(dataDirectory, "*.txt").Order(StringComparer.Ordinal))
         {
-            Array.Empty<byte>(),
-            Encoding.UTF8.GetBytes("a"),
-            Encoding.UTF8.GetBytes("b"),
-            Encoding.UTF8.GetBytes("aaaa"),
-            Encoding.UTF8.GetBytes("ba"),
-            Encoding.UTF8.GetBytes(" abc "),
-            Encoding.UTF8.GetBytes("abc\n"),
-            Encoding.UTF8.GetBytes("ąčęėįšųūž 🥀🥀🥀🥀"),
-            Encoding.UTF8.GetBytes("🥀🥀🥀🥀🥀🥀🥀🥀🥀🥀🥀🥀"),
-        };
-        //Hashes everything
-        foreach (var input in inputs)
-        {
+            byte[] input = File.ReadAllBytes(path);
             string result = hash(input);
             Helpers.AssertValidHash(result);
+            Console.WriteLine($"{Path.GetFileName(path)} ({input.Length} bytes): {result}");
         }
         //Leading 0 
         bool found = false;

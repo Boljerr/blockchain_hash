@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hash", "Hash\Hash.csproj", "{58D8764F-C9BD-4FC3-B1C5-C2268C16D113}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hash.Experiments", "Hash.Experiments\Hash.Experiments.csproj", "{9C663226-E35F-416C-B2A6-8F62176F49D6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hash.Tests", "Hash.Tests\Hash.Tests.csproj", "{213A71A9-5089-499C-B196-8F72F6F3407F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{58D8764F-C9BD-4FC3-B1C5-C2268C16D113}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58D8764F-C9BD-4FC3-B1C5-C2268C16D113}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58D8764F-C9BD-4FC3-B1C5-C2268C16D113}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58D8764F-C9BD-4FC3-B1C5-C2268C16D113}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C663226-E35F-416C-B2A6-8F62176F49D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C663226-E35F-416C-B2A6-8F62176F49D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C663226-E35F-416C-B2A6-8F62176F49D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C663226-E35F-416C-B2A6-8F62176F49D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{213A71A9-5089-499C-B196-8F72F6F3407F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{213A71A9-5089-499C-B196-8F72F6F3407F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{213A71A9-5089-499C-B196-8F72F6F3407F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{213A71A9-5089-499C-B196-8F72F6F3407F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {94929BCB-480A-46A6-941C-810D7287FD66}
+	EndGlobalSection
+EndGlobal

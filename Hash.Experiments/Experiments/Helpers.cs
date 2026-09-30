@@ -15,6 +15,8 @@ public static class Helpers
 
     public const string Alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
+    public const int Seed = 676767;
+
     public static byte[] Generate(int length, Random random)
     {
         byte[] bytes = new byte[length];
