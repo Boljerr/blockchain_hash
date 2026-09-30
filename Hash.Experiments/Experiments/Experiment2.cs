@@ -5,7 +5,7 @@ namespace Hash.Experiments.Experiments;
 
 public static class Experiment2
 {
-    public static void Run(Func<byte[], string> hash)
+    public static void Run(Func<byte[], string> hash, int hexLength)
     {
         //Hashes every txt file in data
         string dataDirectory = Path.Combine(AppContext.BaseDirectory, "data");
@@ -13,7 +13,7 @@ public static class Experiment2
         {
             byte[] input = File.ReadAllBytes(path);
             string result = hash(input);
-            Helpers.AssertValidHash(result);
+            Helpers.AssertValidHash(result, hexLength);
             Console.WriteLine($"{Path.GetFileName(path)} ({input.Length} bytes): {result}");
         }
         //Leading 0 
@@ -22,7 +22,7 @@ public static class Experiment2
         {
             byte[] input = Encoding.UTF8.GetBytes(i.ToString());
             string result = hash(input);
-            Helpers.AssertValidHash(result);
+            Helpers.AssertValidHash(result, hexLength);
             if (result[0] == '0')
             {
                 Console.WriteLine("Leading zero: " + result + " At iteration: " + i);
@@ -46,8 +46,8 @@ public static class Experiment2
         string typedHash = hash(typedBytes);
         string fileHash = hash(fileBytes);
         
-        Helpers.AssertValidHash(fileHash);
-        Helpers.AssertValidHash(typedHash);
+        Helpers.AssertValidHash(fileHash, hexLength);
+        Helpers.AssertValidHash(typedHash, hexLength);
         
         if(typedHash != fileHash)
             throw new Exception("Same bytes gave different results :(");

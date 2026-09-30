@@ -4,7 +4,7 @@ namespace Hash.Experiments.Experiments;
 
 public static class Experiment4
 {
-    public static void Run(string name, Func<byte[], string> hash)
+    public static void Run(string name, Func<byte[], string> hash, int hexLength)
     {
         string filePath = Path.Combine(AppContext.BaseDirectory, "data", "konstitucija.txt");
         byte [] file = File.ReadAllBytes(filePath);
@@ -34,7 +34,7 @@ public static class Experiment4
         const int calls = 1000;
         foreach (var input in inputs)
         {
-            Helpers.AssertValidHash(hash(input.Bytes));
+            Helpers.AssertValidHash(hash(input.Bytes),hexLength);
             
             for (int i = 0; i < 5; i++) //warm up
                 hash(input.Bytes);
@@ -51,7 +51,7 @@ public static class Experiment4
 
                 string elapsed = timer.Elapsed.TotalMilliseconds.ToString("F6");
 
-                if (totalDigits != calls * 64)
+                if (totalDigits != calls * hexLength)
                     throw new Exception("Unexpected hash lenght");
                 
                 rows.Add($"{name}, {input.Lines}, {input.Bytes.Length}, {trial}, {calls}, {elapsed}");
