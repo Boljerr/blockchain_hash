@@ -1,13 +1,17 @@
-﻿using Hash.Hashing;
+﻿using System.Security.Cryptography;
+using Hash.Hashing;
 using Hash.Experiments.Experiments;
 
 var igno = new HashFunc();
 var aivaro = new HashaMasha();
 
-var functions = new (string Name, Func<byte[], string> Hash)[]
+var functions = new (string Name, int HexLength, Func<byte[], string> Hash)[]
 {
-    ("Igno", igno.ComputeHash),
-    ("Aivaro", bytes => aivaro.ComputeHash(bytes)),
+    ("Igno", 64, igno.ComputeHash),
+    ("Aivaro", 64, bytes => aivaro.ComputeHash(bytes)),
+    ("MD5", 32, bytes => Convert.ToHexString(MD5.HashData(bytes))),
+    ("SHA1", 40, bytes => Convert.ToHexString(SHA1.HashData(bytes))),
+    ("SHA256", 64, bytes => Convert.ToHexString(SHA256.HashData(bytes))),
 };
 const int seed = 676767;
 foreach (var function in functions)
@@ -15,8 +19,8 @@ foreach (var function in functions)
     var random = new Random(seed);
     Console.WriteLine($"Testing {function.Name}");
     
-    //Experiment2.Run(function.Hash);
+    //Experiment2.Run(function.Hash, function.HexLength);
     
-    //Experiment4.Run(function.Name ,function.Hash);
+    Experiment4.Run(function.Name ,function.Hash, function.HexLength);
     Experiment6.Run(function.Name, function.Hash, random);
 }

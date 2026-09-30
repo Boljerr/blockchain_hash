@@ -4,9 +4,9 @@ namespace Hash.Experiments.Experiments;
 
 public static class Helpers
 {
-    public static void AssertValidHash(string hash)
+    public static void AssertValidHash(string hash, int hexLength)
     {
-        if (hash.Length != 64)
+        if (hash.Length != hexLength)
             throw new Exception($"Expected 64 digits, got {hash.Length} :(");
         //from stackoverflow
         if (!Regex.IsMatch(hash, "^[0-9A-F]+$"))
