@@ -34,7 +34,7 @@ public static class Experiment4
         const int calls = 1000;
         foreach (var input in inputs)
         {
-            HashChecks.AssertValidHash(hash(input.Bytes));
+            Helpers.AssertValidHash(hash(input.Bytes));
             
             for (int i = 0; i < 5; i++) //warm up
                 hash(input.Bytes);

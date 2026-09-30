@@ -23,7 +23,7 @@ public static class Experiment2
         foreach (var input in inputs)
         {
             string result = hash(input);
-            HashChecks.AssertValidHash(result);
+            Helpers.AssertValidHash(result);
         }
         //Leading 0 
         bool found = false;
@@ -31,7 +31,7 @@ public static class Experiment2
         {
             byte[] input = Encoding.UTF8.GetBytes(i.ToString());
             string result = hash(input);
-            HashChecks.AssertValidHash(result);
+            Helpers.AssertValidHash(result);
             if (result[0] == '0')
             {
                 Console.WriteLine("Leading zero: " + result + " At iteration: " + i);
@@ -55,8 +55,8 @@ public static class Experiment2
         string typedHash = hash(typedBytes);
         string fileHash = hash(fileBytes);
         
-        HashChecks.AssertValidHash(fileHash);
-        HashChecks.AssertValidHash(typedHash);
+        Helpers.AssertValidHash(fileHash);
+        Helpers.AssertValidHash(typedHash);
         
         if(typedHash != fileHash)
             throw new Exception("Same bytes gave different results :(");
